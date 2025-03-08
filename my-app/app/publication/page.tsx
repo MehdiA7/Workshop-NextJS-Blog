@@ -1,8 +1,13 @@
 import React from "react";
 import PublicationCard from "../components/PublicationCard";
 import Link from "next/link";
+import { PrismaClient } from "@prisma/client";
 
-const PublicationPage = () => {
+const prisma = new PrismaClient();
+
+const PublicationPage = async () => {
+    const publications = await prisma.publication.findMany();
+
     return (
         <main className="space-y-6">
             <h1 className="flex justify-center text-2xl">Publication</h1>
@@ -13,18 +18,15 @@ const PublicationPage = () => {
                     </button>
                 </Link>
             </div>
-
-            <PublicationCard
-                title="My new Bike"
-                description="My bike is totaly amazing and electrical ! See that ! Oh no i can't put a photo here ..."
-                like={2}
-            />
-
-            <PublicationCard
-                title="My new Bike"
-                description="My bike is totaly amazing and electrical ! See that ! Oh no i can't put a photo here ..."
-                like={2}
-            />
+            
+            <ul>
+                {publications.map((p) => <li key={p.id}>
+                    <PublicationCard
+                    title={p.title}
+                    description={p.description}
+                    like={p.like} />
+                    </li>)}
+            </ul>
         </main>
     );
 };

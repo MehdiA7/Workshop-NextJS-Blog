@@ -9,6 +9,11 @@ const createPublicationSchema = z.object({
     description: z.string().min(1)
 });
 
+const createLikeSchema = z.object({
+    id: z.number(),
+    liked: z.boolean()
+});
+
 // create a post function
 export async function POST(request: NextRequest) {
     // get the body
@@ -25,3 +30,36 @@ export async function POST(request: NextRequest) {
     // send the response and status
     return NextResponse.json(newIssue, { status: 201 });
 }
+
+export async function PATCH(request: NextRequest) {
+    const body = await request.json();
+
+    const validation = createLikeSchema.safeParse(body);
+    if(!validation.success){
+        return NextResponse.json(validation.error.errors, { status: 400});
+    }
+
+    try {
+        const publication = await prisma.publication.findUnique({
+            where: { id: body.id }
+        });
+
+        if (!publication) {
+            return NextResponse.json({ error: "Publication not found" }, { status: 404 });
+        }
+
+        const updatedPublication = await prisma.publication.update({
+            where: { id: body.id },
+            data: { 
+                like: body.liked 
+                    ? { increment: 1 }  
+                    : { decrement: 1 }  
+            }
+        });
+
+        return NextResponse.json(updatedPublication, { status: 200 });
+    } catch (error) {
+        return NextResponse.json({ error: "Failed to update like" }, { status: 500 });
+    }
+}
+
