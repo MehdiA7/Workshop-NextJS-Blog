@@ -1,14 +1,36 @@
 import React from "react";
-import { FaArrowDown } from "react-icons/fa";
 
 const NewPublicationForm = () => {
     return (
-        <div className="flex justify-center mt-5">
-            <h1 className="inline-flex">
-                <FaArrowDown className="mr-2"/>
-                Create your publication
-                <FaArrowDown className="ml-2"/>
-            </h1>
+        <div className="flex justify-center border-2 w-80 ">
+            <form action="" className="mt-4 mb-4 space-y-4">
+                <label htmlFor="title" className="mr-14">
+                    Title
+                </label>
+                <input
+                    type="text"
+                    id="title"
+                    className="bg-blue-50 border-black"
+                />
+                <br />
+                <label htmlFor="description" className="mr-1.5">
+                    Description
+                </label>
+                <input
+                    type="text"
+                    id="description"
+                    className="bg-blue-50 border-black"
+                />
+                <br />
+                <div className="flex justify-end">
+                    <button
+                        type="submit"
+                        className="bg-blue-600 hover:bg-blue-500 p-1 rounded-md"
+                    >
+                        Create
+                    </button>
+                </div>
+            </form>
         </div>
     );
 };

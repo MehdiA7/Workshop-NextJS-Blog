@@ -17,7 +17,7 @@ model publication {
   id          Int      @id @default(autoincrement())
   title       String   @db.Char(255)
   description String   @db.Text
-  like        Int      @db.Int @default(0)
+  like        Int      @default(0) @db.Int
   createdAt   DateTime @default(now())
   updatedAt   DateTime @updatedAt
 }

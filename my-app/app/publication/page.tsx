@@ -8,11 +8,18 @@ const PublicationPage = () => {
             <h1 className="flex justify-center text-2xl">Publication</h1>
             <div className="flex justify-end">
                 <Link href="/publication/create">
-                    <button className="bg-blue-600 p-1 rounded-md mr-10 ">
+                    <button className="bg-blue-600 hover:bg-blue-500 p-1 rounded-md mr-10 ">
                         Create New
                     </button>
                 </Link>
             </div>
+
+            <PublicationCard
+                title="My new Bike"
+                description="My bike is totaly amazing and electrical ! See that ! Oh no i can't put a photo here ..."
+                like={2}
+            />
+
             <PublicationCard
                 title="My new Bike"
                 description="My bike is totaly amazing and electrical ! See that ! Oh no i can't put a photo here ..."
