@@ -18,6 +18,7 @@ const NewPublicationForm = () => {
     const router = useRouter();
 
     const onSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
+        e.preventDefault();
         setIsSubmit(true);
 
         const data: bodyData = {

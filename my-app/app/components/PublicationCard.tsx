@@ -34,8 +34,8 @@ const PublicationCard = ({ id, title, description, like }: Props) => {
     }
 
     return (
-        <div className="flex-col m-auto w-96 space-y-3">
-            <h3 className="text-xl text-center">{title}</h3>
+        <div className="flex-col m-auto w-96 space-y-4">
+            <h3 className="text-xl text-center"><u>{title}</u></h3>
             <p>{description}</p>
             <div className="inline-flex space-x-2">
                 <button onClick={handleLike}>
@@ -43,6 +43,7 @@ const PublicationCard = ({ id, title, description, like }: Props) => {
                 </button>
                 <span className="">{likeStatus}</span>
             </div>
+            <hr className="mt-4 mb-4"/>
         </div>
     );
 };

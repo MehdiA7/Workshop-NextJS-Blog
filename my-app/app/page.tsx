@@ -3,9 +3,9 @@ import TypeWriterEffect from "./components/TypeWriterEffect";
 
 export default function Home() {
     return (
-        <div>
+        <div className="mt-4">
             <h1 className="flex justify-center text-xl">
-            <TypeWriterEffect>WELCOME TO MY BLOG</TypeWriterEffect>
+            <TypeWriterEffect>🕵️ ANONYMOUS BLOG 🕵️</TypeWriterEffect>
             </h1>
             <SeeEventsButton/>
         </div>
