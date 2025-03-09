@@ -1,4 +1,4 @@
-import SeeEventsButton from "./components/SeeEventsButton";
+import SeePublicationButton from "./components/SeePublicationButton";
 import TypeWriterEffect from "./components/TypeWriterEffect";
 
 export default function Home() {
@@ -7,7 +7,7 @@ export default function Home() {
             <h1 className="flex justify-center text-xl">
             <TypeWriterEffect>🕵️ ANONYMOUS BLOG 🕵️</TypeWriterEffect>
             </h1>
-            <SeeEventsButton/>
+            <SeePublicationButton/>
         </div>
     );
 }

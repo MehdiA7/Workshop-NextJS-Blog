@@ -1,7 +1,7 @@
 import Link from "next/link";
 import React from "react";
 
-const SeeEventsButton = () => {
+const SeePublicationButton = () => {
     return (
         <div className="flex justify-center m-4">
             <Link href="/publication">
@@ -13,4 +13,4 @@ const SeeEventsButton = () => {
     );
 };
 
-export default SeeEventsButton;
+export default SeePublicationButton;
