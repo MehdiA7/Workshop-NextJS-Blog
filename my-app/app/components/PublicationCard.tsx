@@ -2,16 +2,35 @@
 import React, { useState } from "react";
 import { AiOutlineLike } from "react-icons/ai";
 type Props = {
+    id: number;
     title: string;
     description: string;
     like: number;
 };
 
-const PublicationCard = ({ title, description, like }: Props) => {
+const PublicationCard = ({ id, title, description, like }: Props) => {
     const [isLiked, setIsLiked] = useState<boolean>(false);
+    const [likeStatus, setLikeStatus] = useState<number>(like);
 
-    const handleLike = () => {
-        // I start the logic to patch in route i need to finish them
+    const handleLike = async () => {
+        
+        setIsLiked(isLiked ? false : true);
+        console.log(isLiked)
+        const body = {
+            id: id,
+            liked: !isLiked
+        }
+
+        try {
+            await fetch("/api/publication", {
+                method: "PATCH",
+                body: JSON.stringify(body)
+            })
+
+            body.liked ? setLikeStatus(likeStatus + 1) : setLikeStatus(likeStatus - 1);
+        } catch (error) {
+            console.log(error);
+        }
     }
 
     return (
@@ -20,9 +39,9 @@ const PublicationCard = ({ title, description, like }: Props) => {
             <p>{description}</p>
             <div className="inline-flex space-x-2">
                 <button onClick={handleLike}>
-                <AiOutlineLike size="20" className="hover:bg-blue-400 rounded-sm"/>
+                <AiOutlineLike size="20" className={isLiked ? "bg-blue-400 rounded-sm" : "hover:bg-blue-400 rounded-sm"}/>
                 </button>
-                <span className="">{like}</span>
+                <span className="">{likeStatus}</span>
             </div>
         </div>
     );

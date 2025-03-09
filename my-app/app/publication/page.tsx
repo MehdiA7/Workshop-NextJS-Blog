@@ -22,6 +22,7 @@ const PublicationPage = async () => {
             <ul>
                 {publications.map((p) => <li key={p.id}>
                     <PublicationCard
+                    id={p.id}
                     title={p.title}
                     description={p.description}
                     like={p.like} />
