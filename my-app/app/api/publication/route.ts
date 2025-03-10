@@ -14,6 +14,10 @@ const createLikeSchema = z.object({
     liked: z.boolean()
 });
 
+const createDeleteSchema = z.object({
+    id: z.number()
+});
+
 // create a post function
 export async function POST(request: NextRequest) {
     // get the body
@@ -63,3 +67,28 @@ export async function PATCH(request: NextRequest) {
     }
 }
 
+export async function DELETE(request: NextRequest) {
+    const body = await request.json();
+
+    const validation = createDeleteSchema.safeParse(body);
+    if(!validation.success){
+        return NextResponse.json(validation.error.errors, { status: 400 });
+    };
+
+    try {
+        const publication = await prisma.publication.findUnique({
+            where: { id: body.id }
+        });
+
+        if(!publication) {
+            return NextResponse.json({ error: "Publication not found" }, { status: 404 });
+        };
+
+        await prisma.publication.delete({
+            where: { id: body.id }
+        });
+        return NextResponse.json({ message: "Delete success" }, { status: 200 });
+    } catch (error) {
+        return NextResponse.json({ error: "Failed to delete publication" }, { status: 500 });
+    };
+}

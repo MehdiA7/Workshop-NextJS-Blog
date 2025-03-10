@@ -3,6 +3,7 @@ import PublicationCard from "../components/PublicationCard";
 import Link from "next/link";
 import { PrismaClient } from "@prisma/client";
 
+
 const prisma = new PrismaClient();
 
 const PublicationPage = async () => {
@@ -25,7 +26,8 @@ const PublicationPage = async () => {
                     id={p.id}
                     title={p.title}
                     description={p.description}
-                    like={p.like} />
+                    like={p.like} 
+                    />
                     </li>)}
             </ul>
         </main>

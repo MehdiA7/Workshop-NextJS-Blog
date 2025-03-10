@@ -2,6 +2,7 @@
 import React, { useState } from "react";
 import { AiOutlineLike } from "react-icons/ai";
 import { FaRegTrashAlt } from "react-icons/fa";
+import { useRouter } from "next/navigation";
 
 type Props = {
     id: number;
@@ -11,6 +12,7 @@ type Props = {
 };
 
 const PublicationCard = ({ id, title, description, like }: Props) => {
+    const router = useRouter();
     const [isLiked, setIsLiked] = useState<boolean>(false);
     const [likeStatus, setLikeStatus] = useState<number>(like);
 
@@ -36,13 +38,25 @@ const PublicationCard = ({ id, title, description, like }: Props) => {
         }
     };
 
+    const handleDelete = async () => {
+        try {
+            await fetch("/api/publication", {
+                method: 'DELETE',
+                body: JSON.stringify({ id: id })
+            });
+            router.refresh();
+        } catch (error) {
+            console.log(error);
+        }
+    }
+
     return (
         <div className="flex-col m-auto w-96 space-y-4">
             <div className="inline-flex items-center justify-center w-full">
                 <h3 className="text-xl text-center">
                     <u>{title}</u>
                 </h3>
-                <button className="flex justify-center w-6 h-6 items-center ml-8 hover:bg-red-500 rounded-2xl">
+                <button onClick={handleDelete} className="flex justify-center w-6 h-6 items-center ml-8 hover:bg-red-500 rounded-2xl">
                     <FaRegTrashAlt />
                 </button>
             </div>
