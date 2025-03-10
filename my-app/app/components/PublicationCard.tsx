@@ -17,7 +17,7 @@ const PublicationCard = ({ id, title, description, like }: Props) => {
     const [likeStatus, setLikeStatus] = useState<number>(like);
 
     const handleLike = async () => {
-        setIsLiked(isLiked ? false : true);
+        setIsLiked(!isLiked);
         console.log(isLiked);
         const body = {
             id: id,
@@ -30,9 +30,11 @@ const PublicationCard = ({ id, title, description, like }: Props) => {
                 body: JSON.stringify(body),
             });
 
-            body.liked
-                ? setLikeStatus(likeStatus + 1)
-                : setLikeStatus(likeStatus - 1);
+            if (body.liked) {
+                setLikeStatus(likeStatus + 1);
+            } else {
+                setLikeStatus(likeStatus - 1);
+            }
         } catch (error) {
             console.log(error);
         }

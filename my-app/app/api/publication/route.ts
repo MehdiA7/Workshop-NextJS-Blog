@@ -63,7 +63,7 @@ export async function PATCH(request: NextRequest) {
 
         return NextResponse.json(updatedPublication, { status: 200 });
     } catch (error) {
-        return NextResponse.json({ error: "Failed to update like" }, { status: 500 });
+        return NextResponse.json({ error: `Failed to update like : ${error}` }, { status: 500 });
     }
 }
 
@@ -89,6 +89,6 @@ export async function DELETE(request: NextRequest) {
         });
         return NextResponse.json({ message: "Delete success" }, { status: 200 });
     } catch (error) {
-        return NextResponse.json({ error: "Failed to delete publication" }, { status: 500 });
+        return NextResponse.json({ error: `Failed to delete publication : ${error}` }, { status: 500 });
     };
 }
